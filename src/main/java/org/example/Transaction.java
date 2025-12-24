@@ -6,6 +6,9 @@ public class Transaction {
     private int user_id;
     private double amount;
     private String transaction_type;
+    private String merchant_category;
+    private String country;
+    private int hr;
     private double device_risk_score;
     private double ip_risk_score;
 
@@ -13,34 +16,33 @@ public class Transaction {
     public int get_transaction_id(){
         return transaction_id;
     }
-
     public int get_user_id(){
         return user_id;
     }
-
     public double  get_amount(){
         return amount;
     }
-
-    public double get_ip_risk_score(){
-        return ip_risk_score;
-    }
-
-    public double get_device_risk_score(){
-        return device_risk_score;
-    }
-
     public String get_transaction_type(){
         return transaction_type;
     }
+    public double get_ip_risk_score(){
+        return ip_risk_score;
+    }
+    public double get_device_risk_score(){ return device_risk_score; }
+    public String get_Merchant_categorty() { return merchant_category; }
+    public String get_Country() { return country;}
+    public int get_hr() { return hr;}
 
-    //Setting all the infromation one taken from the file or API
+//Setting all the infromation one taken from the file or API
 
-    public void set_transation_data(
+    public void set_transaction_data(
             int transaction_id,
             int user_id,
             double amount,
             String transaction_type,
+            String merchant_category,
+            String country,
+            int hr,
             double device_risk_score,
             double ip_risk_score
     ){
@@ -48,6 +50,9 @@ public class Transaction {
         this.user_id = user_id;
         this.amount = amount;
         this.transaction_type = transaction_type;
+        this.merchant_category = merchant_category;
+        this.country = country;
+        this.hr = hr;
         this.device_risk_score = device_risk_score;
         this.ip_risk_score = ip_risk_score;
 
