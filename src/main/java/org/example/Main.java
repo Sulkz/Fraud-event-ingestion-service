@@ -17,7 +17,7 @@ public class Main {
                             " ip_risk_score: " + transaction.get_ip_risk_score() );
     }
     public static void main(String[] args) throws IOException {
-        File file = new File("src/main/java/org/example/synthetic_fraud_dataset.csv");
+        File file = new File("src\\main\\resources\\synthetic_fraud_dataset.csv");
         FileReader fileReader = new FileReader(file);
         BufferedReader reader = new BufferedReader(fileReader);
 
