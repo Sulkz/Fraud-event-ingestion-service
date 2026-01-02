@@ -1,8 +1,5 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 public class Transaction {
     //attributes of a record
     private int transaction_id;
@@ -12,30 +9,6 @@ public class Transaction {
     private String merchant_category;
     private double device_risk_score;
     private double ip_risk_score;
-    private enum Status{
-        ACCEPT, FLAG, REJECT 
-
-    };
-
-    Status status;
-    
-    HashSet<String> transaction_types = new HashSet<>(Arrays.asList("ATM", "QR", "Online","POS"));
-
-    // structual fields validation of each row
-    Status validationStructure(){
-        if (transaction_id <= 0 || user_id <= 0 || transaction_type == null
-             || merchant_category == null || ip_risk_score <= 0 || device_risk_score <= 0 
-             || !transaction_types.contains(transaction_type)){
-            return Status.REJECT;
-        }else if (amount == 0.0){
-            return Status.FLAG;
-        }else{ 
-            return Status.ACCEPT;
-        
-        }
-
-    }
-
 
     //getters
     public int get_transaction_id(){ return transaction_id;}

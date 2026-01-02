@@ -2,9 +2,10 @@ package org.example;
 
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 
 public class Main {
     public static void print_Transactions(Transaction transaction){
@@ -17,9 +18,15 @@ public class Main {
                             " ip_risk_score: " + transaction.get_ip_risk_score() );
     }
     public static void main(String[] args) throws IOException {
-        File file = new File("src\\main\\resources\\synthetic_fraud_dataset.csv");
-        FileReader fileReader = new FileReader(file);
-        BufferedReader reader = new BufferedReader(fileReader);
+        InputStream inputStream = Main.class
+                .getClassLoader()
+                .getResourceAsStream("synthetic_fraud_dataset.csv");
+
+        if (inputStream == null) {
+            throw new RuntimeException("CSV file not found in resources");
+        }
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
 
         //read the headers and removes the row as not in use
@@ -28,6 +35,7 @@ public class Main {
 
         while ((line = reader.readLine()) != null){
             Transaction transaction = new Transaction();
+            ValidationStatus validationStatus = new ValidationStatus();
             String[] fields = line.split(","); // splits all the words 
 
             
@@ -40,9 +48,10 @@ public class Main {
                 Double.parseDouble(fields[7]),
                 Double.parseDouble(fields[8]));
             
-            print_Transactions(transaction);
-            transaction.validationStructure();
-            
+        
+           validationStatus.validate(transaction);
+
+           
         }
 
     }
