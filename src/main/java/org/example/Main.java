@@ -57,10 +57,10 @@ public class Main {
 
     
             ValidationStatus.Status status = validationStatus.validate(transaction);
-            if(status == ValidationStatus.Status.ACCEPT){
+            
+            if(status == ValidationStatus.Status.REJECT){
                 print_Transactions(transaction);
             }
-
         }
         
 

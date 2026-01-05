@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -11,7 +12,9 @@ public class ValidationStatus {
     };
     
     HashSet<String> transaction_types = new HashSet<>(Arrays.asList("ATM", "QR", "Online","POS"));
- 
+    
+    ArrayList<Integer> Rejected = new ArrayList();
+
 
     // structual fields validation of each row
     public boolean isInvalidStructure(Transaction tr){
@@ -25,7 +28,9 @@ public class ValidationStatus {
     }
 
     public boolean isFlagged(Transaction tr){
-        return tr.get_amount() == 0.0;
+        return tr.get_amount() == 0.0
+        || tr.get_device_risk_score()>= 0.7
+        || tr.get_ip_risk_score()>= 0.7;
     }
 
     public Status validate(Transaction tr){
